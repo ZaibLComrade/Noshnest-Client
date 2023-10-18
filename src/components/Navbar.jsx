@@ -44,7 +44,7 @@ export default function Navbar() {
 				<a className="text-xl normal-case btn btn-ghost">Nosh Nest</a>
 			</div>
 			<div className="hidden navbar-center lg:flex">
-				<ul className="px-1 menu menu-horizontal">
+				<ul className="px-1 space-x-1 menu menu-horizontal">
 					{ listItems }
 				</ul>
 			</div>

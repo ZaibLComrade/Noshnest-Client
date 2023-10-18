@@ -8,6 +8,7 @@ import AuthProvider from "./providers/AuthProvider";
 import RegisterForm from './components/register/RegisterForm';
 import LoginForm from "./components/login/LoginForm";
 import NotFound from './NotFound';
+import AddProduct from './components/AddProduct';
 
 const router = createBrowserRouter([
 	{
@@ -26,7 +27,10 @@ const router = createBrowserRouter([
 			}, {
 				path: "/login",
 				element: <LoginForm/>,
-			}
+			}, {
+				path: "/new",
+				element: <AddProduct/>,
+			},
 		]
 	}
 ])
