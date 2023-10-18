@@ -1,6 +1,6 @@
 import {createContext, useEffect, useState} from "react";
 import PropTypes from "prop-types";
-import auth from "../config/firebase.config";
+import auth from "../config/firebase.config.js";
 import { 
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
