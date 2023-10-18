@@ -5,6 +5,7 @@ import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 	onAuthStateChanged,
+	updateProfile,
 	signOut,
 } from "firebase/auth";
 
@@ -43,6 +44,7 @@ export default function AuthProvider({ children }) {
 		createUser,
 		loginUser,
 		logoutUser,
+		updateProfile,
 	}
 	
 	return <AuthContext.Provider value={ authValue }>
