@@ -14,13 +14,13 @@ const validatePassword = (password) => {
 			text: "Password lenght must be more than 6 characters",
 			icon: "warning",
 			confirmButtonText: "close",
-		})
+		});
 		return false;
 	}
 	if (!capitalExp.test(password)) {
 		Swal.fire({
 			title: "Does not contain capital letters",
-			text: "Password must contain at least 1 capital letter", 
+			text: "Password must contain at least 1 capital letter",
 			icon: "warning",
 			confirmButtonText: "close",
 		});
@@ -32,7 +32,7 @@ const validatePassword = (password) => {
 			text: "Password must contain at least 1 special character",
 			icon: "warning",
 			confirmButtonText: "close",
-		})
+		});
 		return false;
 	}
 	return true;
@@ -63,11 +63,10 @@ export default function RegisterForm() {
 		// Creating firebase user
 		createUser(email, password)
 			.then((userCredential) => {
-				updateProfile(userCredential.user, userProfile)
-				.then(() => {
+				updateProfile(userCredential.user, userProfile).then(() => {
 					setUser(userCredential.user);
-				})
-				
+				});
+
 				Swal.fire({
 					title: "Successfully registered user",
 					icon: "success",

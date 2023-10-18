@@ -4,9 +4,15 @@ import useAuth from "../hooks/useAuth";
 
 const listItems = (
 	<>
-		<li><NavLink to="/">Home</NavLink></li>
-		<li><NavLink to="/register">Register</NavLink></li>
-		<li><NavLink to="/new">Add Product</NavLink></li>
+		<li>
+			<NavLink to="/">Home</NavLink>
+		</li>
+		<li>
+			<NavLink to="/register">Register</NavLink>
+		</li>
+		<li>
+			<NavLink to="/products/new">Add Product</NavLink>
+		</li>
 	</>
 );
 
@@ -45,58 +51,87 @@ export default function Navbar() {
 			</div>
 			<div className="hidden navbar-center lg:flex">
 				<ul className="px-1 space-x-1 menu menu-horizontal">
-					{ listItems }
+					{listItems}
 				</ul>
 			</div>
 			<div className="navbar-end space-x-3 md:space-x-6">
 				<div className="card-actions">
 					<button className="">
-						<PiShoppingCart className="text-2xl md:text-3xl"/>
+						<PiShoppingCart className="text-2xl md:text-3xl" />
 					</button>
 				</div>
-				<div className="items-center hidden md:flex gap-4">
+				<div className="items-center hidden md:flex gap-2">
+					<div className="flex items-center gap-2">
+						<p>
+							{user?.displayName
+								? user.displayName
+								: "Not logged in"}
+						</p>
+						<div className="btn btn-ghost btn-circle avatar">
+							<div className="w-10 rounded-full">
+								<img
+									className="object-cover w-full h-full"
+									src={
+										user?.photoURL
+											? user.photoURL
+											: dummyImage
+									}
+								/>
+							</div>
+						</div>
+					</div>
 					<div>
 						{user ? (
-							<button onClick={ logoutUser } className="ml-2 btn btn-block">
+							<button
+								onClick={logoutUser}
+								className="btn btn-block"
+							>
 								Sign Out
 							</button>
 						) : (
-							<Link to="/login" className="ml-2 btn btn-block">
+							<Link to="/login" className="btn btn-block">
 								Login
 							</Link>
 						)}
-					</div>
-					<div className="flex items-center gap-2">
-						<p>{ user?.displayName ? user.displayName : "Not logged in" }</p>
-						<div className="btn btn-ghost btn-circle avatar">
-							<div className="w-10 rounded-full">
-								<img className="object-cover w-full h-full" src={user?.photoURL ? user.photoURL : dummyImage} />
-							</div>
-						</div>
 					</div>
 				</div>
 				<div>
 					<div className="dropdown md:hidden dropdown-end">
-      <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-        <div className="w-10 rounded-full">
-          <img className="object-cover w-full h-full" src={user?.photoURL ? user.photoURL : dummyImage} />
-        </div>
-      </label>
-      <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-        <li><a>{ user?.displayName ? user.displayName : "Not logged in" }</a></li>
-        <li>
-									{user ? (
-							<a onClick={ logoutUser }>
-								Sign Out
-							</a>
-						) : (
-							<Link to="/login">
-								Login
-							</Link>
-						)}
-		</li>
-      </ul>
-    </div>
+						<label
+							tabIndex={0}
+							className="btn btn-ghost btn-circle avatar"
+						>
+							<div className="w-10 rounded-full">
+								<img
+									className="object-cover w-full h-full"
+									src={
+										user?.photoURL
+											? user.photoURL
+											: dummyImage
+									}
+								/>
+							</div>
+						</label>
+						<ul
+							tabIndex={0}
+							className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+						>
+							<li>
+								<a>
+									{user?.displayName
+										? user.displayName
+										: "Not logged in"}
+								</a>
+							</li>
+							<li>
+								{user ? (
+									<a onClick={logoutUser}>Sign Out</a>
+								) : (
+									<Link to="/login">Login</Link>
+								)}
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>

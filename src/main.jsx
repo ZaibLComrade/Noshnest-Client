@@ -9,6 +9,8 @@ import RegisterForm from './components/register/RegisterForm';
 import LoginForm from "./components/login/LoginForm";
 import NotFound from './NotFound';
 import AddProduct from './components/AddProduct';
+import PrivateRoute from "./PrivateRoute";
+import BrandsProvider from './providers/BrandsProvider';
 
 const router = createBrowserRouter([
 	{
@@ -28,9 +30,14 @@ const router = createBrowserRouter([
 				path: "/login",
 				element: <LoginForm/>,
 			}, {
-				path: "/new",
-				element: <AddProduct/>,
-			},
+				path: "/products/new",
+				element: <PrivateRoute>
+					<BrandsProvider>
+						<AddProduct/>
+					</BrandsProvider>
+				</PrivateRoute>,
+			}, {
+			}
 		]
 	}
 ])
