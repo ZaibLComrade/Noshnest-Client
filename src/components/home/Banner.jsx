@@ -1,21 +1,14 @@
+import banner from "../../assets/banner.jpg"
+
 export default function Banner() {
 	return (
-		<div className="">
-			<div className="min-h-screen hero bg-base-200">
-				<div className="flex-col hero-content lg:flex-row">
-					<img
-						src="https://picsum.photos/3000"
-						className="max-w-sm rounded-lg shadow-2xl"
-					/>
-					<div>
-						<h1 className="text-5xl font-bold">Box Office News!</h1>
-						<p className="py-6">
-							Provident cupiditate voluptatem et in. Quaerat
-							fugiat ut assumenda excepturi exercitationem quasi.
-							In deleniti eaque aut repudiandae et a id nisi.
-						</p>
-						<button className="btn btn-primary">Get Started</button>
-					</div>
+		<div className="min-h-screen hero bg-base-200" style={{ backgroundImage: `url('${ banner }')` }}>
+			<div className="hero-overlay bg-opacity-60"></div>
+			<div className="text-center hero-content">
+				<div className="max-w-md">
+					<h1 className="text-5xl font-bold">Taste the World at Home</h1>
+					<p className="py-6">International flavors, local comfort. Your culinary journey begins here</p>
+					<button className="btn btn-primary">Order Now</button>
 				</div>
 			</div>
 		</div>
