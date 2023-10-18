@@ -8,7 +8,7 @@ export default function Brands() {
 		<div className="mx-auto w-max"><span className="text-6xl">Brands</span></div>
 		<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 			{
-				brands.map(brand => <div key={ brand.id }>
+				brands.map(brand => <div key={ brand._id }>
 					<Link to={`/products/${brand.id}`} className="shadow-xl hover:shadow-2xl rounded-2xl">
 						<figure className="h-[300px]">
 							<img src={ brand.brand_img } className="object-cover w-full h-full rounded-2xl"/>

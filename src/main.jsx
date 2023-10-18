@@ -11,6 +11,10 @@ import NotFound from './NotFound';
 import AddProduct from './components/AddProduct';
 import PrivateRoute from "./PrivateRoute";
 import BrandsProvider from './providers/BrandsProvider';
+import ProductPage from './components/brand/ProductsPage';
+import ProductDetails from './components/brand/ProductDetails';
+
+const server = "http://localhost:5000";
 
 const router = createBrowserRouter([
 	{
@@ -37,6 +41,13 @@ const router = createBrowserRouter([
 					</BrandsProvider>
 				</PrivateRoute>,
 			}, {
+				path: "/products/:brand",
+				element: <ProductPage/>,
+				loader: ({ params }) => fetch(`${server}/products/${params.brand}`)
+			}, {
+				path: "/products/:brand/:id/details",
+				element: <ProductDetails/>,
+				loader: ({ params }) => fetch(`${server}/products/${params}`)
 			}
 		]
 	}
@@ -49,3 +60,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 		</AuthProvider>
 	</React.StrictMode>,
 )
+
+// Banner Img links
+// https://i.postimg.cc/tJmJVcvn/alessandro-d-antonio-qy4vrr2qi3-M-unsplash-min-min.jpg
+// https://i.postimg.cc/tTps0WVJ/lucas-santos-JKa-KXJOIde-M-unsplash-min.jpg
+// https://i.postimg.cc/sX4Z1wR5/maximilian-bruck-4-SKd-Rc-Y13j4-unsplash-min-min.jpg
+
