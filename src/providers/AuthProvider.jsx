@@ -18,6 +18,7 @@ export default function AuthProvider({ children }) {
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, userCredential => {
 			setUser(userCredential);
+			setLoading(false);
 		})
 		return () => unsubscribe();
 	}, [])
@@ -39,6 +40,7 @@ export default function AuthProvider({ children }) {
 	
 	const authValue = {
 		user,
+		setUser,
 		loading, 
 		setLoading,
 		createUser,

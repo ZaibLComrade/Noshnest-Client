@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './components/home/Home';
 import AuthProvider from "./providers/AuthProvider";
 import RegisterForm from './components/register/RegisterForm';
+import LoginForm from "./components/login/LoginForm";
 import NotFound from './NotFound';
 
 const router = createBrowserRouter([
@@ -22,6 +23,9 @@ const router = createBrowserRouter([
 			}, {
 				path: "/register",
 				element: <RegisterForm/>,
+			}, {
+				path: "/login",
+				element: <LoginForm/>,
 			}
 		]
 	}

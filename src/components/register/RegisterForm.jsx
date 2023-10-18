@@ -40,7 +40,7 @@ const validatePassword = (password) => {
 
 export default function RegisterForm() {
 	// Getting customized firebase functions from context
-	const { createUser, updateProfile, setLoading, user } = useAuth();
+	const { createUser, updateProfile, setLoading, setUser } = useAuth();
 	const navigate = useNavigate();
 	// Runs when form is submitted
 	const handleSubmit = (e) => {
@@ -63,16 +63,19 @@ export default function RegisterForm() {
 		// Creating firebase user
 		createUser(email, password)
 			.then((userCredential) => {
-				updateProfile(userCredential.user, userProfile);
-				user.displayName = name;
-				user.photoURL = image;
+				updateProfile(userCredential.user, userProfile)
+				.then(() => {
+					setUser(userCredential.user);
+				})
+				
 				Swal.fire({
 					title: "Successfully registered user",
-					icon: "info",
+					icon: "success",
 					confirmButtonText: "Continue",
 				}).then(() => {
 					navigate("/");
 				});
+				setLoading(false);
 			})
 			.catch((err) => {
 				if (err.code === "auth/email-already-in-use")
