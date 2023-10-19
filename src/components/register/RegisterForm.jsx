@@ -42,7 +42,7 @@ const validatePassword = (password) => {
 export default function RegisterForm() {
 	const server = useServer();
 	// Getting customized firebase functions from context
-	const { createUser, logoutUser, loginUser, updateProfile, setLoading, setUser } = useAuth();
+	const { createUser, setUserId, logoutUser, loginUser, updateProfile, setLoading, setUser } = useAuth();
 	const navigate = useNavigate();
 	// Runs when form is submitted
 	const handleSubmit = (e) => {
@@ -73,6 +73,7 @@ export default function RegisterForm() {
 						email: user.email,
 						creationTime: user?.metadata?.creationTime,
 						lastSignInTime: user?.metadata?.lastSignInTime,
+						cart: [],
 					}
 					setUser(userCredential.user);
 					fetch(`${server}/users`, {
@@ -81,9 +82,9 @@ export default function RegisterForm() {
 							"content-type": "application/json",
 						},
 						body: JSON.stringify(userData),
-					}).then(res => res.json()).then(res => console.log(res));
+					})
 					logoutUser();
-					loginUser(email, password);
+					loginUser(email, password)
 				});
 				
 				Swal.fire({

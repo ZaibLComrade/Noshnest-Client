@@ -13,9 +13,9 @@ export default function ProductPage() {
 			<h1 className="mx-auto text-5xl w-max">Products</h1>
 			<div className="container p-4 mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
 				{
-					products.map(product => <div key={ product._id } className="flex flex-col items-center text-center lg:text-left rounded-xl lg:flex-row bg-neutral">
-						<div className="h-[300px] w-[200px] p-4">
-							<img src={ product.img } className="object-cover w-full h-full"/>
+					products.map(product => <div key={ product._id } className="items-center text-center grid grid-cols-1 md:grid-cols-2 lg:text-left rounded-xl bg-neutral">
+						<div className="h-[300px] w-full rounded-lg p-4">
+							<img src={ product.img } className="object-contain w-full h-full rounded-lg md:object-cover"/>
 						</div>
 						<div className="flex flex-col justify-between p-4 lg:h-full gap-6">
 								<div>

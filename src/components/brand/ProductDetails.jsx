@@ -2,10 +2,12 @@ import {useState} from "react";
 import {useLoaderData} from "react-router-dom"
 import { PiShoppingCart } from "react-icons/pi";
 import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
 
 export default function ProductDetails() {
+	const { userId } = useAuth();
 	const [quantity, setQuantity] = useState(0);
-	const { img, name, short_description, type, brand_name, price } = useLoaderData();
+	const { img, name, short_description, type, brand_name, price, rating } = useLoaderData();
 	
 	const increment = () => {
 		setQuantity(parseFloat(quantity + 1));
@@ -29,12 +31,14 @@ export default function ProductDetails() {
 			icon: "warning",
 			confirmButtonText: "Close",
 		}).then(() => setQuantity(0));
+		
+		
 	}
 	
-	return <div className="container mx-auto">
-		<div className="md:flex">
-			<div className="h-[500px] mx-auto shrink-0 max-w-[400px]">
-				<img className="object-contain w-full h-full" src={ img }/>
+	return <div className="container space-y-12 mx-auto py-[70px]">
+		<div className="md:flex gap-6">
+			<div className="h-[500px] mx-auto shrink-0 rounded-lg max-w-[400px]">
+				<img className="object-cover w-full h-full rounded-lg" src={ img }/>
 			</div>
 			<div className="p-4 grow space-y-12">
 				<div className="text-center space-y-4">
@@ -47,6 +51,7 @@ export default function ProductDetails() {
 						<div className="text-center md:text-left">
 							<p><span>Type:</span> <span>{ type }</span></p>
 							<p><span>Brand:</span> <span>{ brand_name }</span></p>
+							<p><span>Rating:</span> <span>{ rating }</span></p>
 						</div>
 
 					</div>
@@ -83,6 +88,25 @@ export default function ProductDetails() {
 				</div>
 			</div>
 		</div>
-		<div></div>
+		{/* <div className="items-start grid grid-cols-2 gap-8"> */}
+		{/* 	<div className="space-y-4"> */}
+		{/* 		<h2 className="mx-auto text-3xl w-max">Ingredients</h2> */}
+		{/* 		<p className="mx-auto text-center"> */}
+		{/* 			<span>{ ingredients[0] }</span> */}
+		{/* 		</p> */}
+		{/* 	</div> */}
+		{/* 	<div className="shrink-0"> */}
+		{/* 		<div className="mx-auto space-y-4 max-w-[400px]"> */}
+		{/* 			<h2 className="mx-auto text-3xl w-max">Nutrition Facts</h2> */}
+		{/* 			<ol className="mx-auto list-disc grid grid-cols-1 md:grid-cols-2"> */}
+		{/* 				{ */}
+		{/* 					nutrition_facts.map((elem, idx) => <li key={ idx }> */}
+		{/* 						{ elem } */}
+		{/* 					</li>) */}
+		{/* 				} */}
+		{/* 			</ol> */}
+		{/* 		</div> */}
+		{/* 	</div> */}
+		{/* </div> */}
 	</div>
 }

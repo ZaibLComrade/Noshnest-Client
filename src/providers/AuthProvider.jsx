@@ -1,6 +1,7 @@
 import {createContext, useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import auth from "../config/firebase.config.js";
+import useServer from "../hooks/useServer";
 import { 
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
@@ -12,16 +13,25 @@ import {
 export const AuthContext = createContext(null);
 
 export default function AuthProvider({ children }) {
+	const server = useServer();
+	const [userId, setUserId] = useState("");
 	const [user, setUser] = useState({});
 	const [loading, setLoading] = useState(true);
 	
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, userCredential => {
 			setUser(userCredential);
+			if(userCredential) {
+				fetch(`${server}/users/${userCredential.email}`)
+					.then(response => response.json())
+					.then(result => setUserId(result));
+			} else {
+				setUserId(null);
+			}
 			setLoading(false);
 		})
 		return () => unsubscribe();
-	}, [])
+	}, [server])
 	
 	const createUser = (email, password) => {
 		setLoading(false);
@@ -40,6 +50,7 @@ export default function AuthProvider({ children }) {
 	
 	const authValue = {
 		user,
+		userId,
 		setUser,
 		loading, 
 		setLoading,

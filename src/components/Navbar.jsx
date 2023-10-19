@@ -19,7 +19,7 @@ const listItems = (
 const dummyImage = "https://picsum.photos/50";
 
 export default function Navbar() {
-	const { user, logoutUser } = useAuth();
+	const { user, logoutUser, userId } = useAuth();
 	return (
 		<div className="navbar bg-base-100">
 			<div className="navbar-start">
@@ -56,7 +56,7 @@ export default function Navbar() {
 			</div>
 			<div className="navbar-end space-x-3 md:space-x-6">
 				<div className="card-actions">
-					<Link to={`/cart/${user?.email}`}>
+					<Link to={`/cart/${userId}`}>
 						<button className="">
 							<PiShoppingCart className="text-2xl md:text-3xl" />
 						</button>

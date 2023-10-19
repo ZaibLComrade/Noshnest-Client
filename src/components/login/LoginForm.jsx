@@ -4,7 +4,7 @@ import useServer from "../../hooks/useServer";
 import Swal from "sweetalert2";
 
 export default function RegisterForm() {
-	const { loginUser, user, setLoading } = useAuth();
+	const { loginUser, user, setUserId, setLoading } = useAuth();
 	const navigate = useNavigate();
 	const location = useLocation();
 	const server = useServer();
@@ -36,7 +36,7 @@ export default function RegisterForm() {
 						"content-type": "application/json",
 					},
 					body: JSON.stringify(update),
-				}).then(res => res.json()).then(result => console.log(result));
+				});
 				
 				Swal.fire({
 					title: "Successfully logged in",
