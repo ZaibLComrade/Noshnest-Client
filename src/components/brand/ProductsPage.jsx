@@ -4,7 +4,7 @@ import BrandsProvider from "../../providers/BrandsProvider";
 import Slider from "./Slider";
 
 export default function ProductPage() {
-	const products = useLoaderData();
+	const { productInfo: products } = useLoaderData();
 	return <div className="space-y-16">
 		<BrandsProvider>
 			<Slider/>

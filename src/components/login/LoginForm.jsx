@@ -1,18 +1,17 @@
-import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import useServer from "../../hooks/useServer";
 import Swal from "sweetalert2";
 
 export default function RegisterForm() {
-	// Getting customized firebase functions from context
 	const { loginUser, user, setLoading } = useAuth();
 	const navigate = useNavigate();
 	const location = useLocation();
-
-	// Runs when form is submitted
+	const server = useServer();
+	
 	const handleSubmit = (e) => {
-		e.preventDefault(); // Prevents reload when submitted
-		// Collecting form input data
+		e.preventDefault(); 
+		
 		const form = new FormData(e.currentTarget);
 		const email = form.get("email");
 		const password = form.get("password");
@@ -26,10 +25,19 @@ export default function RegisterForm() {
 			});
 			return;
 		}
-
-		// Loggin in firebase user
+		
 		loginUser(email, password)
-			.then(() => {
+			.then((userCredential) => {
+				const user = userCredential.user;
+				const update = {lastSignInTime: user?.metadata?.lastSignInTime};
+				fetch(`${server}/users/${user.email}`, {
+					method: "PATCH",
+					headers: {
+						"content-type": "application/json",
+					},
+					body: JSON.stringify(update),
+				}).then(res => res.json()).then(result => console.log(result));
+				
 				Swal.fire({
 					title: "Successfully logged in",
 					icon: "success",
@@ -40,7 +48,6 @@ export default function RegisterForm() {
 				});
 			})
 			.catch((err) => {
-				// errorToast("Invalid email or password")
 				Swal.fire({
 					title: "Invalid email or password",
 					icon: "error",
@@ -48,16 +55,9 @@ export default function RegisterForm() {
 				}).then(() => {
 					setLoading(false);
 				});
-			}); // TODO: Errors to be manipulated later
+			});
 	};
-
-	// const handleGoogleSignIn = e => {
-	//   e.preventDefault();
-	//   googleSignInUser()
-	//     .then(() => navigate(location?.state || "/"))
-	//     .catch(err => console.error(err));
-	// }
-
+	
 	return (
 		<div>
 			{location.state && (

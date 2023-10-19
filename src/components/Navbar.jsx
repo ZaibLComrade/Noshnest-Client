@@ -56,7 +56,7 @@ export default function Navbar() {
 			</div>
 			<div className="navbar-end space-x-3 md:space-x-6">
 				<div className="card-actions">
-					<Link to="/cart">
+					<Link to={`/cart/${user?.email}`}>
 						<button className="">
 							<PiShoppingCart className="text-2xl md:text-3xl" />
 						</button>

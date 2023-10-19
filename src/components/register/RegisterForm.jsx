@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import useServer from "../../hooks/useServer";
 import Swal from "sweetalert2";
 
 const validatePassword = (password) => {
@@ -11,7 +12,7 @@ const validatePassword = (password) => {
 	if (lengthExp.test(password)) {
 		Swal.fire({
 			title: "Password is too short",
-			text: "Password lenght must be more than 6 characters",
+			text: "Password length must be more than 6 characters",
 			icon: "warning",
 			confirmButtonText: "close",
 		});
@@ -39,8 +40,9 @@ const validatePassword = (password) => {
 };
 
 export default function RegisterForm() {
+	const server = useServer();
 	// Getting customized firebase functions from context
-	const { createUser, updateProfile, setLoading, setUser } = useAuth();
+	const { createUser, logoutUser, loginUser, updateProfile, setLoading, setUser } = useAuth();
 	const navigate = useNavigate();
 	// Runs when form is submitted
 	const handleSubmit = (e) => {
@@ -64,9 +66,26 @@ export default function RegisterForm() {
 		createUser(email, password)
 			.then((userCredential) => {
 				updateProfile(userCredential.user, userProfile).then(() => {
+					const user = userCredential.user;
+					const userData = {
+						name: user.displayName,
+						img: user.photoURL,
+						email: user.email,
+						creationTime: user?.metadata?.creationTime,
+						lastSignInTime: user?.metadata?.lastSignInTime,
+					}
 					setUser(userCredential.user);
+					fetch(`${server}/users`, {
+						method: "POST",
+						headers: {
+							"content-type": "application/json",
+						},
+						body: JSON.stringify(userData),
+					}).then(res => res.json()).then(res => console.log(res));
+					logoutUser();
+					loginUser(email, password);
 				});
-
+				
 				Swal.fire({
 					title: "Successfully registered user",
 					icon: "success",
