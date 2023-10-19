@@ -13,6 +13,17 @@ export default function ProductUpdate() {
 	const handleInput = e => {
 		e.preventDefault();
 		
+		const form = e.target;
+		const newProduct = {
+			name: form.name.value,
+			brand_name: form.brand.value,
+			type: form.type.value,
+			price: form.price.value,
+			short_description: form.description.value,
+			img: form.photoURL.value,
+			rating: productRating,
+		}
+		
 		Swal.fire({
 			title: "Are you sure?",
 			text: "You can't revert changes",
@@ -22,43 +33,27 @@ export default function ProductUpdate() {
 			denyButtonText: "Cancel",
 		}).then(resolve => {
 			if(resolve.isDenied) return;
-		})
-		
-		const form = e.target;
-		const newProduct = {
-			name: form.name.value,
-			brand: form.brand.value,
-			type: form.type.value,
-			price: form.price.value,
-			description: form.description.value,
-			photo: form.photoURL.value,
-			rating: productRating,
-		}
-		
-		fetch(`${server}/products`, {
-			method: "PUT",
-			headers: {
-				"content-type": "application/json",
-			},
-			body: JSON.stringify(newProduct),
-		})
-		.then(response => response.json())
-		.then(result => {
-			if(result.acknowledged) {
-				Swal.fire({
-					title: 'Added!',
-					text: 'Item has been updated successfully',
-					icon: 'success',
-					confirmButtonText: 'Cool'
-				}).then(response => {
-					if(response.isConfirmed) form.reset();
+			else {
+				fetch(`${server}/products/${productData._id}`, {
+					method: "PUT",
+					headers: {
+						"content-type": "application/json",
+					},
+					body: JSON.stringify(newProduct),
+				})
+				.then(response => response.json())
+				.then(result => {
+					if(result.acknowledged) {
+						Swal.fire({
+							title: 'Added!',
+							text: 'Item has been updated successfully',
+							icon: 'success',
+							confirmButtonText: 'Cool'
+						})
+					}
 				})
 			}
 		})
-	}
-	
-	const handleInputvalue = e => {
-		const inputValue = e.target.value;
 	}
 	
 	return <div className="container mx-auto py-[70px] space-y-6">
@@ -95,7 +90,7 @@ export default function ProductUpdate() {
 					</label>
 					<div className="pt-1 rating rating-lg rating-half" onChange={ e => setProductRating(e.target.value) }>
 						<input type="radio" name="rating" value="0.0" className="rating-hidden" defaultChecked={ productData.rating === 0.0 }/>
-						<input type="radio" name="rating" value="0.5" className="bg-green-500 mask mask-star-2 mask-half-1" required defaultChecked={ productData.rating === 0.0 }/>
+						<input type="radio" name="rating" value="0.5" className="bg-green-500 mask mask-star-2 mask-half-1" defaultChecked={ productData.rating === 0.5 } />
 						<input type="radio" name="rating" value="1.0" className="bg-green-500 mask mask-star-2 mask-half-2" defaultChecked={ productData.rating === 1.0 } />
 						<input type="radio" name="rating" value="1.5" className="bg-green-500 mask mask-star-2 mask-half-1" defaultChecked={ productData.rating === 1.5 } />
 						<input type="radio" name="rating" value="2.0" className="bg-green-500 mask mask-star-2 mask-half-2" defaultChecked={ productData.rating === 2.0 } />
@@ -122,7 +117,7 @@ export default function ProductUpdate() {
 						<label className="label">
 							<span className="label-text">Photo</span>
 						</label>
-						<input type="text" defaultValue={ productData.photo } name="photoURL" placeholder="Enter photo URL" className="w-full input input-bordered"/>
+						<input type="text" defaultValue={ productData.img } name="photoURL" placeholder="Enter photo URL" className="w-full input input-bordered"/>
 					</div>
 					
 					{/* Brand name */}
@@ -144,7 +139,7 @@ export default function ProductUpdate() {
 				</div>
 				{/* Submit */}
 				<div className="mx-auto mt-6 w-max col-span-1 md:col-span-2">
-					<input type="submit" value="Add Product" className="w-full btn hover:bg-custom-white-2 border-custom-coffee-2 bg-custom-coffee-1 input-bordered"/>
+					<input type="submit" value="Update Product" className="w-full btn hover:bg-custom-white-2 border-custom-coffee-2 bg-custom-coffee-1 input-bordered"/>
 				</div>
 			</form>
 		</div>

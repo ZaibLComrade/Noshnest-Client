@@ -14,6 +14,7 @@ import BrandsProvider from './providers/BrandsProvider';
 import ProductPage from './components/brand/ProductsPage';
 import ProductDetails from './components/brand/ProductDetails';
 import ProductUpdate from './components/brand/ProductUpdate';
+import Cart from './components/Cart';
 
 const server = "http://localhost:5000";
 
@@ -57,6 +58,9 @@ const router = createBrowserRouter([
 					</BrandsProvider>
 				</PrivateRoute>,
 				loader: ({ params }) => fetch(`${server}/products/details/${params.id}`),
+			}, {
+				path: "/cart",
+				element: <PrivateRoute><Cart/></PrivateRoute>,
 			}
 		]
 	}

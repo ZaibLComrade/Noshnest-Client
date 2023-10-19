@@ -13,11 +13,11 @@ export default function AddProduct() {
 		const form = e.target;
 		const newProduct = {
 			name: form.name.value,
-			brand: form.brand.value,
+			brand_name: form.brand.value,
 			type: form.type.value,
 			price: form.price.value,
-			description: form.description.value,
-			photo: form.photoURL.value,
+			short_description: form.description.value,
+			img: form.photoURL.value,
 			rating: productRating,
 		}
 		

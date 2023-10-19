@@ -56,9 +56,11 @@ export default function Navbar() {
 			</div>
 			<div className="navbar-end space-x-3 md:space-x-6">
 				<div className="card-actions">
-					<button className="">
-						<PiShoppingCart className="text-2xl md:text-3xl" />
-					</button>
+					<Link to="/cart">
+						<button className="">
+							<PiShoppingCart className="text-2xl md:text-3xl" />
+						</button>
+					</Link>
 				</div>
 				<div className="items-center hidden md:flex gap-2">
 					<div className="flex items-center gap-2">

@@ -1,9 +1,14 @@
 import {useLoaderData} from "react-router-dom"
 import { Link } from "react-router-dom";
+import BrandsProvider from "../../providers/BrandsProvider";
+import Slider from "./Slider";
 
 export default function ProductPage() {
 	const products = useLoaderData();
 	return <div>
+		<BrandsProvider>
+			<Slider/>
+		</BrandsProvider>
 		<div className="container p-4 mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
 			{
 				products.map(product => <div key={ product._id } className="flex flex-col items-center text-center lg:text-left rounded-xl lg:flex-row bg-neutral">
