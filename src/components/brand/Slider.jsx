@@ -23,7 +23,6 @@ const createSlider = (contents, idx) => {
 
 export default function Slider() {
 	const brands = useBrands();
-	console.log(brands);
 	// const imgArr = brands[5].advertizement_imgs;
 	
 	return (
@@ -34,17 +33,24 @@ export default function Slider() {
 				hasTrack={ false }
 				aria-label="Testimonials"
 				options= {{
+					autoplay: true,
 					rewind: true,
-					type: "fade",
+					type: "loop",
+					pauseOnHover: false,
 					height: "100vh",
 					width: "100%",
 				}}
 			>
-				<SplideTrack>
-				{imgLinks.map((elem, idx) =>
-					createSlider(elem, idx)
-				)}
-				</SplideTrack>
+				<div className="relative">
+					<SplideTrack>
+					{imgLinks.map((elem, idx) =>
+						createSlider(elem, idx)
+					)}
+					</SplideTrack>
+				</div>
+				<div className="splide__progress">
+					<div className="splide__progress__bar" />
+				</div>
 			</Splide>
 		</div>
 	);
