@@ -1,13 +1,40 @@
-import {useLoaderData} from "react-router-dom"
+import {useState} from "react";
+import {useLoaderData, useParams} from "react-router-dom";
+import useServer from "../hooks/useServer";
+import Swal from "sweetalert2";
+import useAuth from "../hooks/useAuth";
 
 export default function Cart() {
-	const cart = useLoaderData();
+	const [cart, setCart] = useState(useLoaderData());
+	const [subtotal, setSubtotal] = useState(cart.reduce((acc, curr) => acc + curr.total , 0));
+	const userId = useParams();
+	const server = useServer();
+	
 	const totalQuantity = cart.reduce((acc, curr) => acc + curr.quantity, 0);
 	const tax = 0;
 	const discount = 0;
 	const shipping = 5;
-	const subtotalPrice = cart.reduce((acc, curr) => acc + curr.total , 0);
-	const totalPrice = subtotalPrice + tax + discount + shipping
+	const totalPrice = subtotal + tax + discount + shipping
+	
+	const handleDelete = idx => {
+		fetch(`${server}/cart/${userId.id}`, {
+			method: "PATCH",
+			headers: {
+				"content-type": "application/json",
+			},
+			body: JSON.stringify({ idx }),
+		}).then(response => response.json())
+			.then(result => {
+				setCart(result);
+				setSubtotal(result.reduce((acc, curr) => acc + curr.total , 0))
+				Swal.fire({
+					title: "Deleted item from cart",
+					icon: "success",
+					confirmButtonText: "Close",
+				})
+			});
+	}
+	
 	return <div className="container mx-auto lg:flex max-lg:space-y-8 px-4 flex-row-reverse gap-4 py-[70px]">
 		<div className="mx-auto h-max md:min-w-[300px] max-w-[400px] md:w-[400px] rounded-xl border">
 			<div className="p-4 space-y-8">
@@ -18,7 +45,7 @@ export default function Cart() {
 						<p><span>Quantity:</span> <span>{ totalQuantity }</span></p>
 					</div>
 					<div className="text-right grow">
-						<p className="grid grid-cols-2"><span className="text-left">Subtotal:</span> <span>{ subtotalPrice.toFixed(2) } $</span></p>
+						<p className="grid grid-cols-2"><span className="text-left">Subtotal:</span> <span>{ subtotal.toFixed(2) } $</span></p>
 						<hr/>
 						<p className="grid grid-cols-2"><span className="text-left">Tax:</span> <span>{ tax.toFixed(2) } $</span></p>
 						<hr/>
@@ -34,10 +61,10 @@ export default function Cart() {
 		<div className="bg-neutral rounded-xl grow">
 			{
 				cart.map((item, idx) => <div key={ idx }>
-					<div className="p-4 grid-cols-1 md:grid-cols-2 grid">
-						<div className="flex items-center text-center justify between lg:text-left ">
+					<div className="p-4 grid-cols-1 md:grid-cols-3 grid">
+						<div className="items-center text-center col-span-2 md:flex justify between lg:text-left ">
 							
-							<div className="w-[250px] h-[250px] p-4 rounded-lg">
+							<div className="md:w-[250px] max-md:mx-auto shrink-0 h-[250px] p-4 rounded-lg">
 								<img src={ item.img } className="object-contain w-full h-full rounded-lg md:object-cover"/>
 							</div>
 							<div className="flex flex-col justify-between p-4 lg:h-full gap-6">
@@ -53,7 +80,7 @@ export default function Cart() {
 								<p><span>Price:</span> <span>{ item.price } $</span></p>
 								<p><span>Quantity:</span> <span>{ item.quantity }</span></p>
 								<p className="text-2xl"><span>Total:</span> <span>{ item.total } $</span></p>
-								<button className="mt-4 btn">Delete</button>
+								<button onClick={ () => handleDelete(idx) } className="mt-4 btn">Delete</button>
 							</div>
 						</div>
 					</div>
