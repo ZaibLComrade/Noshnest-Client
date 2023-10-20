@@ -10,7 +10,7 @@ export default function Subscribe() {
 					<span className="px-2 py-px font-bold text-yellow-800 bg-yellow-100 rounded-lg -rotate-1 font-dancing">More than 1600 subscribers join us daily</span>
 					<h3 className="max-w-2xl mt-2 text-2xl font-bold leading-tight text-center text-white sm:text-3xl md:text-4xl font-lato md:leading-tight">Subscribe to our newsletter to keep getting latest products updates</h3>
 					<form action="" className="flex flex-col items-center w-full max-w-md mx-auto mt-4 gap-3 sm:flex-row sm:gap-0">
-						<input type="email" name="email" id="email" className="px-3 py-3 border-2 border-gray-300 rounded grow focus:border-emerald-500 focus:outline-none sm:rounded-l-md sm:rounded-r-none sm:border-r-0" placeholder="Email Address" />
+						<input type="email" name="email" id="email" className="px-0 py-3 border-2 border-gray-300 rounded md:px-4 grow focus:border-emerald-500 focus:outline-none sm:rounded-l-md sm:rounded-r-none sm:border-r-0" placeholder="Email Address" />
 						<button type="submit" className="px-5 py-4 font-bold text-white normal-case rounded font-montserrat border-emerald-500 bg-emerald-500 btn sm:rounded-l-none sm:rounded-r-md">Subscribe</button>
 					</form>
 				</div>

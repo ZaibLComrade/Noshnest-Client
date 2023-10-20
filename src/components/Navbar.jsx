@@ -55,7 +55,7 @@ export default function Navbar({ setDark }) {
 						{listItems}
 					</ul>
 				</div>
-				<Link to="/" className="text-4xl normal-case font-playfair btn btn-ghost">Nosh Nest</Link>
+				<Link to="/" className="text-2xl normal-case md:text-4xl font-playfair btn btn-ghost">Nosh Nest</Link>
 			</div>
 			<div className="hidden navbar-center lg:flex">
 				<ul className="px-1 font-semibold space-x-1 font-montserrat menu menu-horizontal">
@@ -63,7 +63,7 @@ export default function Navbar({ setDark }) {
 				</ul>
 			</div>
 			<div className="navbar-end space-x-3 md:space-x-6">
-				<div className="flex items-center gap-2">
+				<div className="items-center hidden md:flex gap-2">
 					<div className="bg-white border rounded-full">
 						<img src={ DarkImg } className="w-6 h-6"/>
 					</div>
@@ -131,6 +131,14 @@ export default function Navbar({ setDark }) {
 							className="menu menu-sm dropdown-content font-montserrat mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
 						>
 							<li>
+				<div className="flex items-center gap-2">
+					<div className="bg-white border rounded-full">
+						<img src={ DarkImg } className="w-6 h-6"/>
+					</div>
+					<input type="checkbox" className="toggle" onChange={ handleToggle } />
+				</div>
+							</li>
+							<li>
 								<a>
 									{user?.displayName && user.displayName }
 								</a>
@@ -142,6 +150,7 @@ export default function Navbar({ setDark }) {
 									<Link to="/login">Login</Link>
 								)}
 							</li>
+
 						</ul>
 					</div>
 				</div>

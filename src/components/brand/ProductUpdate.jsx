@@ -57,7 +57,7 @@ export default function ProductUpdate() {
 	}
 	
 	return <div className="container mx-auto py-[70px] space-y-6">
-		<h1 className="mx-auto text-5xl w-max">Update Product</h1>
+		<h1 className="mx-auto text-3xl md:text-5xl w-max">Update Product</h1>
 		<div className="mb-[120px] bg-custom-white-1">
 			<form onSubmit={ handleInput } className="p-6 mx-auto md:w-[70%] gap-4 grid grid-cols-1 md:grid-cols-2">
 				{/* Product Name */}
