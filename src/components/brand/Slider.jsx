@@ -26,7 +26,7 @@ export default function Slider() {
 					<SplideTrack>
 					{advertizement_imgs.map((elem, idx) =>
 						<SplideSlide key={ idx }>
-							<div className="absolute w-full h-full bg-black/60"></div>
+							<div className="absolute w-full h-full bg-black/10"></div>
 							<img 
 								src={ elem }
 								className="object-cover w-full h-full"
