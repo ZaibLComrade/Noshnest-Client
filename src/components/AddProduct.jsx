@@ -76,7 +76,7 @@ export default function AddProduct() {
 						<span className="label-text">Rating</span>
 					</label>
 					<div className="pt-1 rating rating-lg rating-half" onChange={ e => setProductRating(e.target.value) }>
-						<input type="radio" name="rating" value="0.0" className="rating-hidden"/>
+						<input type="radio" name="rating" value="0.0" className="rating-hidden" defaultChecked/>
 						<input type="radio" name="rating" value="0.5" className="bg-green-500 mask mask-star-2 mask-half-1" required/>
 						<input type="radio" name="rating" value="1.0" className="bg-green-500 mask mask-star-2 mask-half-2" />
 						<input type="radio" name="rating" value="1.5" className="bg-green-500 mask mask-star-2 mask-half-1" />

@@ -8,8 +8,8 @@ export default function Slider() {
 	
 	return (
 		<div className="relative z-[1] overflow-hidden">
-			{/* <div className="absolute xl:top-[100px] -top-[10px] lg:top-[70px] md:top-[0px] z-[1] text-center w-full h-full"> */}
-			{/* </div> */}
+			<div className="absolute xl:top-[100px] -top-[10px] lg:top-[70px] md:top-[0px] z-[1] text-center w-full h-full">
+			</div>
 			<Splide
 				hasTrack={ false }
 				aria-label="Testimonials"
@@ -26,7 +26,14 @@ export default function Slider() {
 					<SplideTrack>
 					{advertizement_imgs.map((elem, idx) =>
 						<SplideSlide key={ idx }>
-							<img className="object-cover w-full h-full" src={ elem }/>
+							<div className="absolute w-full h-full bg-black/60"></div>
+							<img 
+								src={ elem }
+								className="object-cover w-full h-full"
+							/>
+							<div className="absolute text-center text-secondary top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+								<p data-aos="fade-up" id="trigger-aos" className="mb-5 text-lg md:text-2xl lg:text-3xl font-dancing-script"></p>
+							</div>
 						</SplideSlide>
 					)}
 					</SplideTrack>
@@ -38,3 +45,5 @@ export default function Slider() {
 		</div>
 	);
 }
+
+

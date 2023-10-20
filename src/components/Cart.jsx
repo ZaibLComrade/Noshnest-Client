@@ -2,7 +2,6 @@ import {useState} from "react";
 import {useLoaderData, useParams} from "react-router-dom";
 import useServer from "../hooks/useServer";
 import Swal from "sweetalert2";
-import useAuth from "../hooks/useAuth";
 
 export default function Cart() {
 	const [cart, setCart] = useState(useLoaderData());
@@ -55,6 +54,7 @@ export default function Cart() {
 						<hr/>
 						<p className="grid grid-cols-2"><span className="text-left">Total:</span> <span>{ totalPrice.toFixed(2) } $</span></p>
 					</div>
+					<div className="w-full"><button className="block mx-auto btn">Proceed to payment</button></div>
 				</div>
 			</div>
 		</div>

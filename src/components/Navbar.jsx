@@ -1,6 +1,7 @@
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { PiShoppingCart } from "react-icons/pi";
 import useAuth from "../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const listItems = (
 	<>
@@ -16,11 +17,11 @@ const listItems = (
 	</>
 );
 
-const dummyImage = "https://picsum.photos/50";
+const dummyImage = "https://i.postimg.cc/T2bdytT4/tmx6-W6-N-2696144912.png";
 
 export default function Navbar() {
 	const { user, logoutUser, userId } = useAuth();
-	const navigate = useNavigate();
+	
 	return (
 		<div className="navbar bg-base-100">
 			<div className="navbar-start">
@@ -66,9 +67,7 @@ export default function Navbar() {
 				<div className="items-center hidden md:flex gap-2">
 					<div className="flex items-center gap-2">
 						<p>
-							{user?.displayName
-								? user.displayName
-								: "Not logged in"}
+							{user?.displayName && user.displayName}
 						</p>
 						<div className="btn btn-ghost btn-circle avatar">
 							<div className="w-10 rounded-full">
@@ -121,9 +120,7 @@ export default function Navbar() {
 						>
 							<li>
 								<a>
-									{user?.displayName
-										? user.displayName
-										: "Not logged in"}
+									{user?.displayName && user.displayName }
 								</a>
 							</li>
 							<li>

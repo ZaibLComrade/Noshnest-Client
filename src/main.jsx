@@ -5,8 +5,8 @@ import Root from './components/Root';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './components/home/Home';
 import AuthProvider from "./providers/AuthProvider";
-import RegisterForm from './components/register/RegisterForm';
-import LoginForm from "./components/login/LoginForm";
+import RegisterPage from './components/register/RegisterPage';
+import LoginPage from "./components/login/LoginPage";
 import NotFound from './NotFound';
 import AddProduct from './components/AddProduct';
 import PrivateRoute from "./PrivateRoute";
@@ -16,7 +16,7 @@ import ProductDetails from './components/brand/ProductDetails';
 import ProductUpdate from './components/brand/ProductUpdate';
 import Cart from './components/Cart';
 
-const server = "http://localhost:5000";
+const server = "https://noshnest-server.vercel.app";
 
 const router = createBrowserRouter([
 	{
@@ -31,10 +31,10 @@ const router = createBrowserRouter([
 				element: <Home/>,
 			}, {
 				path: "/register",
-				element: <RegisterForm/>,
+				element: <RegisterPage/>,
 			}, {
 				path: "/login",
-				element: <LoginForm/>,
+				element: <LoginPage/>,
 			}, {
 				path: "/products/new",
 				element: <PrivateRoute>

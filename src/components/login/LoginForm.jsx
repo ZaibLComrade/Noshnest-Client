@@ -103,8 +103,8 @@ export default function LoginForm() {
 	return (
 		<div>
 			{location.state && (
-				<div className="mx-auto h-max w-max">
-					<h1 className="text-5xl leading-[80px]">
+				<div className="mx-auto mb-6 h-max w-max">
+					<h1 className="md:text-5xl text-2xl leading-[80px]">
 						Login To Continue
 					</h1>
 				</div>

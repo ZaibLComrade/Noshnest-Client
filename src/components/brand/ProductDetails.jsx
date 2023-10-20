@@ -7,7 +7,7 @@ import useAuth from "../../hooks/useAuth";
 
 export default function ProductDetails() {
 	const { userId } = useAuth();
-	const [quantity, setQuantity] = useState(0);
+	const [quantity, setQuantity] = useState(1);
 	const server = useServer();
 	const product = useLoaderData()
 	const { _id, img, name, short_description, type, brand_name, price, rating } = product;
