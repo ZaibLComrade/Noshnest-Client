@@ -104,7 +104,7 @@ export default function LoginForm() {
 		<div>
 			{location.state && (
 				<div className="mx-auto mb-6 h-max w-max">
-					<h1 className="md:text-5xl text-2xl leading-[80px]">
+					<h1 className="md:text-5xl font-montserrat font-semibold text-white text-2xl leading-[80px]">
 						Login To Continue
 					</h1>
 				</div>

@@ -1,7 +1,8 @@
-import { NavLink, Link, useNavigate } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { PiShoppingCart } from "react-icons/pi";
 import useAuth from "../hooks/useAuth";
-import Swal from "sweetalert2";
+import PropTypes from "prop-types";
+import DarkImg from "../assets/nightmode.png"
 
 const listItems = (
 	<>
@@ -19,11 +20,16 @@ const listItems = (
 
 const dummyImage = "https://i.postimg.cc/T2bdytT4/tmx6-W6-N-2696144912.png";
 
-export default function Navbar() {
+export default function Navbar({ setDark }) {
 	const { user, logoutUser, userId } = useAuth();
 	
+	const handleToggle = e => {
+		if(e.target.checked) setDark("dark");
+		else setDark("light");
+	}
+	
 	return (
-		<div className="navbar bg-base-100">
+		<div className="py-4 navbar bg-base-100">
 			<div className="navbar-start">
 				<div className="dropdown">
 					<label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -44,19 +50,25 @@ export default function Navbar() {
 					</label>
 					<ul
 						tabIndex={0}
-						className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+						className="menu menu-sm font-montserrat font-semibold dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
 					>
 						{listItems}
 					</ul>
 				</div>
-				<a className="text-xl normal-case btn btn-ghost">Nosh Nest</a>
+				<Link to="/" className="text-4xl normal-case font-playfair btn btn-ghost">Nosh Nest</Link>
 			</div>
 			<div className="hidden navbar-center lg:flex">
-				<ul className="px-1 space-x-1 menu menu-horizontal">
+				<ul className="px-1 font-semibold space-x-1 font-montserrat menu menu-horizontal">
 					{listItems}
 				</ul>
 			</div>
 			<div className="navbar-end space-x-3 md:space-x-6">
+				<div className="flex items-center gap-2">
+					<div className="bg-white border rounded-full">
+						<img src={ DarkImg } className="w-6 h-6"/>
+					</div>
+					<input type="checkbox" className="toggle" onChange={ handleToggle } />
+				</div>
 				<div className="card-actions">
 					<Link state={ `/cart/${userId}` } to={userId ? `/cart/${userId}` : "/login" }>
 						<button className="">
@@ -91,7 +103,7 @@ export default function Navbar() {
 								Sign Out
 							</button>
 						) : (
-							<Link to="/login" className="btn btn-block">
+							<Link to="/login" className="normal-case text-md btn font-montserrat btn-block">
 								Login
 							</Link>
 						)}
@@ -116,7 +128,7 @@ export default function Navbar() {
 						</label>
 						<ul
 							tabIndex={0}
-							className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+							className="menu menu-sm dropdown-content font-montserrat mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
 						>
 							<li>
 								<a>
@@ -136,4 +148,8 @@ export default function Navbar() {
 			</div>
 		</div>
 	);
+}
+
+Navbar.propTypes = {
+	setDark: PropTypes.func,
 }

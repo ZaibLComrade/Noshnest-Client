@@ -1,6 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Lato:wght@400;700&family=Montserrat:wght@400;500;600;700&family=Pacifico&family=Playfair+Display:wght@400;500;600;700&family=Quicksand:wght@400;500;700&family=Raleway:wght@400;500;600&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.font-dancing {
+	font-family: 'Dancing Script', cursive;
+}
+.font-lato {
+	font-family: 'Lato', sans-serif;
+}
+.font-montserrat {
+	font-family: 'Montserrat', sans-serif;
+}
+.font-pacifico {
+	font-family: 'Pacifico', cursive;
+}
+.font-playfair {
+	font-family: 'Playfair Display', serif;
+}
+.font-quicksand {
+	font-family: 'Quicksand', sans-serif;
+}
+.font-raleway {
+	font-family: 'Raleway', sans-serif;
+}
 
 .headroom {
 	z-index: 9999 !important;

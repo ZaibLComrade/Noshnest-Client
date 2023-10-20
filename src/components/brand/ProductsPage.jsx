@@ -10,23 +10,23 @@ export default function ProductPage() {
 			<Slider/>
 		</BrandsProvider>
 		<div className="space-y-6">
-			<h1 className="mx-auto text-5xl w-max">Products</h1>
+			<h1 className="mx-auto text-5xl font-playfair w-max">Products</h1>
 			<div className="container p-4 mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
 				{
-					products.length ? products.map(product => <div key={ product._id } className="items-center text-center grid grid-cols-1 md:grid-cols-2 lg:text-left rounded-xl bg-neutral">
+					products.length ? products.map(product => <div key={ product._id } className="items-center text-center grid grid-cols-1 md:grid-cols-2 lg:text-left rounded-xl bg-neutral/70">
 						<div className="h-[300px] w-full rounded-lg p-4">
 							<img src={ product.img } className="object-contain w-full h-full rounded-lg md:object-cover"/>
 						</div>
-						<div className="flex flex-col justify-between p-4 lg:h-full gap-6">
+						<div className="flex flex-col justify-between p-4 text-white font-raleway lg:h-full gap-6">
 								<div>
-								<h3><span>Name:</span> <span>{ product.name }</span></h3>
+								<h3 className="font-semibold"><span>Name:</span> <span>{ product.name }</span></h3>
 								<p><span>Type:</span> <span>{ product.type }</span></p>
 								<p><span>Brand:</span> <span>{ product.brand_name }</span></p>
-								<p><span>Rating:</span> <span>{ product.rating }</span></p>
+									<p className={(product.rating >= 4.5) && "font-semibold"}><span>Rating:</span> <span>{ product.rating }</span></p>
 								<p><span>Description:</span> <span>{ product.short_description }</span></p>
-								<p><span>Price:</span> <span>{ product.price } $</span></p>
+								<p className="font-semibold"><span>Price:</span> <span>{ product.price } $</span></p>
 								</div>
-								<div className="flex justify-evenly">
+								<div className="flex normal-case font-montserrat justify-evenly">
 									<Link to={`/products/details/${product._id}`}>
 										<button className="btn btn-primary">Details</button>
 									</Link>

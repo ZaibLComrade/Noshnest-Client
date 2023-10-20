@@ -58,7 +58,7 @@ export default function Cart() {
 				</div>
 			</div>
 		</div>
-		<div className="bg-neutral rounded-xl grow">
+		<div className="bg-neutral/20 rounded-xl grow">
 			{
 				cart.map((item, idx) => <div key={ idx }>
 					<div className="p-4 grid-cols-1 md:grid-cols-3 grid">
