@@ -14,7 +14,7 @@ export const AuthContext = createContext(null);
 
 export default function AuthProvider({ children }) {
 	const server = useServer();
-	const [userId, setUserId] = useState("");
+	const [userId, setUserId] = useState(null);
 	const [user, setUser] = useState({});
 	const [loading, setLoading] = useState(true);
 	
@@ -51,6 +51,7 @@ export default function AuthProvider({ children }) {
 	const authValue = {
 		user,
 		userId,
+		setUserId,
 		setUser,
 		loading, 
 		setLoading,

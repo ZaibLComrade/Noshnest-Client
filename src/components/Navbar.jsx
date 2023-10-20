@@ -1,4 +1,4 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { PiShoppingCart } from "react-icons/pi";
 import useAuth from "../hooks/useAuth";
 
@@ -20,6 +20,7 @@ const dummyImage = "https://picsum.photos/50";
 
 export default function Navbar() {
 	const { user, logoutUser, userId } = useAuth();
+	const navigate = useNavigate();
 	return (
 		<div className="navbar bg-base-100">
 			<div className="navbar-start">
@@ -56,7 +57,7 @@ export default function Navbar() {
 			</div>
 			<div className="navbar-end space-x-3 md:space-x-6">
 				<div className="card-actions">
-					<Link to={`/cart/${userId}`}>
+					<Link state={ `/cart/${userId}` } to={userId ? `/cart/${userId}` : "/login" }>
 						<button className="">
 							<PiShoppingCart className="text-2xl md:text-3xl" />
 						</button>

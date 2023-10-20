@@ -1,13 +1,16 @@
 import {useState} from "react";
 import {useLoaderData} from "react-router-dom"
 import { PiShoppingCart } from "react-icons/pi";
+import useServer from "../../hooks/useServer";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 
 export default function ProductDetails() {
 	const { userId } = useAuth();
 	const [quantity, setQuantity] = useState(0);
-	const { img, name, short_description, type, brand_name, price, rating } = useLoaderData();
+	const server = useServer();
+	const product = useLoaderData()
+	const { _id, img, name, short_description, type, brand_name, price, rating } = product;
 	
 	const increment = () => {
 		setQuantity(parseFloat(quantity + 1));
@@ -23,6 +26,8 @@ export default function ProductDetails() {
 		setQuantity(inpValue);
 	}
 	
+
+	
 	const handleAddToCart = e => {
 		e.preventDefault();
 		const totalPrice = (price * quantity).toFixed(2);
@@ -31,8 +36,41 @@ export default function ProductDetails() {
 			icon: "warning",
 			confirmButtonText: "Close",
 		}).then(() => setQuantity(0));
-		
-		
+		else if(userId) {
+			const productInfo = {
+				_id,
+				img,
+				name,
+				type,
+				brand_name,
+				price,
+				quantity,
+				total: price * quantity,
+			};
+			
+			fetch(`${server}/userdetails/${userId}`, {
+				method: "PATCH",
+				headers: {
+					"content-type": "application/json",
+				},
+				body: JSON.stringify(productInfo),
+			}).then(response => response.json())
+				.then(result => {
+					if(result.acknowledged) {
+						Swal.fire({
+							title: "Product added to cart successfully",
+							confirmButtonText: "Close",
+							icon: "success",
+						})
+					}
+				})
+		} else {
+			Swal.fire({
+				title: "User not found",
+				confirmButtonText: "Close",
+				icon: "error",
+			})
+		}
 	}
 	
 	return <div className="container space-y-12 mx-auto py-[70px]">
@@ -51,9 +89,24 @@ export default function ProductDetails() {
 						<div className="text-center md:text-left">
 							<p><span>Type:</span> <span>{ type }</span></p>
 							<p><span>Brand:</span> <span>{ brand_name }</span></p>
-							<p><span>Rating:</span> <span>{ rating }</span></p>
-						</div>
 
+							<div className="text-center md:text-left max-sm:mx-auto w-max space-y-3">
+								<p>Rating: <span>{ rating }</span></p>
+								<div className="relative right-2 rating rating-lg rating-half">
+									<input type="radio" name="rating" value="0.0" className="rating-hidden" defaultChecked={ (rating >= 0.0) && true }/>
+									<input type="radio" name="rating" value="0.5" className="bg-green-500 mask mask-star-2 mask-half-1"  defaultChecked={ (rating >= 0.5) && true } />
+									<input type="radio" name="rating" value="1.0" className="bg-green-500 mask mask-star-2 mask-half-2"  defaultChecked={ (rating >= 1.0) && true } />
+									<input type="radio" name="rating" value="1.5" className="bg-green-500 mask mask-star-2 mask-half-1"  defaultChecked={ (rating >= 1.5) && true } />
+									<input type="radio" name="rating" value="2.0" className="bg-green-500 mask mask-star-2 mask-half-2"  defaultChecked={ (rating >= 2.0) && true } />
+									<input type="radio" name="rating" value="2.5" className="bg-green-500 mask mask-star-2 mask-half-1"  defaultChecked={ (rating >= 2.5) && true } />
+									<input type="radio" name="rating" value="3.0" className="bg-green-500 mask mask-star-2 mask-half-2"  defaultChecked={ (rating >= 3.0) && true } />
+									<input type="radio" name="rating" value="3.5" className="bg-green-500 mask mask-star-2 mask-half-1"  defaultChecked={ (rating >= 3.5) && true } />
+									<input type="radio" name="rating" value="4.0" className="bg-green-500 mask mask-star-2 mask-half-2"  defaultChecked={ (rating >= 4.0) && true } />
+									<input type="radio" name="rating" value="4.5" className="bg-green-500 mask mask-star-2 mask-half-1"  defaultChecked={ (rating >= 4.5) && true } />
+									<input type="radio" name="rating" value="5.0" className="bg-green-500 mask mask-star-2 mask-half-2"  defaultChecked={ (rating >= 5.0) && true } />
+								</div>
+							</div>
+						</div>
 					</div>
 					<div className="text-center space-y-4 grow">
 						<div className="flex items-center justify-center gap-4">

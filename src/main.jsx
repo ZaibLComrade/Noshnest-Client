@@ -1,8 +1,8 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
 import Root from './components/Root';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './components/home/Home';
 import AuthProvider from "./providers/AuthProvider";
 import RegisterForm from './components/register/RegisterForm';
@@ -60,7 +60,7 @@ const router = createBrowserRouter([
 				loader: ({ params }) => fetch(`${server}/products/details/${params.id}`),
 			}, {
 				path: "/cart/:id",
-				element: <PrivateRoute><Cart/></PrivateRoute>,
+				element: <Cart/>,
 				loader: ({ params }) => fetch(`${server}/cart/${params.id}`)
 			}
 		]
@@ -74,9 +74,3 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 		</AuthProvider>
 	</React.StrictMode>,
 )
-
-// Banner Img links
-// https://i.postimg.cc/tJmJVcvn/alessandro-d-antonio-qy4vrr2qi3-M-unsplash-min-min.jpg
-// https://i.postimg.cc/tTps0WVJ/lucas-santos-JKa-KXJOIde-M-unsplash-min.jpg
-// https://i.postimg.cc/sX4Z1wR5/maximilian-bruck-4-SKd-Rc-Y13j4-unsplash-min-min.jpg
-

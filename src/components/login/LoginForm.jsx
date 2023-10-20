@@ -2,9 +2,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useServer from "../../hooks/useServer";
 import Swal from "sweetalert2";
+import {useState} from "react";
 
-export default function RegisterForm() {
-	const { loginUser, user, setUserId, setLoading } = useAuth();
+export default function LoginForm() {
+	const { loginUser, user, setLoading } = useAuth();
+	const [tempEmail, setTempEmail] = useState("");
 	const navigate = useNavigate();
 	const location = useLocation();
 	const server = useServer();
@@ -38,23 +40,63 @@ export default function RegisterForm() {
 					body: JSON.stringify(update),
 				});
 				
-				Swal.fire({
-					title: "Successfully logged in",
-					icon: "success",
-					confirmButtonText: "Continue",
-				}).then(() => {
-					navigate(location?.state || "/");
-					setLoading(false);
-				});
+				if(location.state === "/cart/null") {
+					setLoading(true);
+					fetch(`${server}/users/${user.email}`)
+						.then(response => response.json())
+						.then(result => {
+							location.state = `/cart/${result}`;
+							Swal.fire({
+								title: "Successfully logged in",
+								icon: "success",
+								confirmButtonText: "Continue",
+							}).then(() => {
+								navigate(location.state);
+								setLoading(false);
+							});
+						});
+				} else {
+					Swal.fire({
+						title: "Successfully logged in",
+						icon: "success",
+						confirmButtonText: "Continue",
+					}).then(() => {
+						navigate(location?.state || "/");
+						setLoading(false);
+					});
+				}
 			})
 			.catch((err) => {
-				Swal.fire({
-					title: "Invalid email or password",
-					icon: "error",
-					confirmButtonText: "Close",
-				}).then(() => {
-					setLoading(false);
-				});
+				fetch(`${server}/users/user-exists/${tempEmail}`)
+					.then(response => response.json())
+					.then(result => {
+						if(result === "user-not-found") {
+							Swal.fire({
+								title: "User doesn't exist",
+								icon: "error",
+								confirmButtonText: "Close",
+							}).then(() => {
+								setLoading(false);
+							});
+						} else if(err.code === "auth/invalid-login-credentials") {
+							Swal.fire({
+								title: "Incorrect Password",
+								icon: "error",
+								confirmButtonText: "Close",
+							}).then(() => {
+								setLoading(false);
+							});
+						} else if(err.code === "auth/too-many-requests") {
+							Swal.fire({
+								title: "Account has been temporarily disabled",
+								text: "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.",
+								icon: "error",
+								confirmButtonText: "Close",
+							}).then(() => {
+								setLoading(false);
+							});
+						}
+					})
 			});
 	};
 	
@@ -82,6 +124,7 @@ export default function RegisterForm() {
 							name="email"
 							className="input input-bordered"
 							required
+							onChange={ e => setTempEmail(e.target.value) }
 						/>
 					</div>
 					<div className="form-control">

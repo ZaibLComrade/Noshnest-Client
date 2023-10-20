@@ -82,7 +82,12 @@ export default function RegisterForm() {
 							"content-type": "application/json",
 						},
 						body: JSON.stringify(userData),
+					}).then(() => {
+						fetch(`${server}/users/${user.email}`)
+							.then(response => response.json())
+							.then(result => setUserId(result));
 					})
+					
 					logoutUser();
 					loginUser(email, password)
 				});

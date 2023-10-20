@@ -89,17 +89,17 @@ export default function ProductUpdate() {
 						<span className="label-text">Rating</span>
 					</label>
 					<div className="pt-1 rating rating-lg rating-half" onChange={ e => setProductRating(e.target.value) }>
-						<input type="radio" name="rating" value="0.0" className="rating-hidden" defaultChecked={ (productData.rating === 0.0) && true }/>
-						<input type="radio" name="rating" value="0.5" className="bg-green-500 mask mask-star-2 mask-half-1"  defaultChecked={ (productData.rating === 0.5) && true } />
-						<input type="radio" name="rating" value="1.0" className="bg-green-500 mask mask-star-2 mask-half-2"  defaultChecked={ (productData.rating === 1.0) && true } />
-						<input type="radio" name="rating" value="1.5" className="bg-green-500 mask mask-star-2 mask-half-1"  defaultChecked={ (productData.rating === 1.5) && true } />
-						<input type="radio" name="rating" value="2.0" className="bg-green-500 mask mask-star-2 mask-half-2"  defaultChecked={ (productData.rating === 2.0) && true } />
-						<input type="radio" name="rating" value="2.5" className="bg-green-500 mask mask-star-2 mask-half-1"  defaultChecked={ (productData.rating === 2.5) && true } />
-						<input type="radio" name="rating" value="3.0" className="bg-green-500 mask mask-star-2 mask-half-2"  defaultChecked={ (productData.rating === 3.0) && true } />
-						<input type="radio" name="rating" value="3.5" className="bg-green-500 mask mask-star-2 mask-half-1"  defaultChecked={ (productData.rating === 3.5) && true } />
-						<input type="radio" name="rating" value="4.0" className="bg-green-500 mask mask-star-2 mask-half-2"  defaultChecked={ (productData.rating === 4.0) && true } />
-						<input type="radio" name="rating" value="4.5" className="bg-green-500 mask mask-star-2 mask-half-1"  defaultChecked={ (productData.rating === 4.5) && true } />
-						<input type="radio" name="rating" value="5.0" className="bg-green-500 mask mask-star-2 mask-half-2"  defaultChecked={ (productData.rating === 5.0) && true } />
+						<input type="radio" name="rating" value="0.0" className="rating-hidden" defaultChecked={ (productData.rating >= 0.0) && true }/>
+						<input type="radio" name="rating" value="0.5" className="bg-green-500 mask mask-star-2 mask-half-1"  defaultChecked={ (productData.rating >= 0.5) && true } />
+						<input type="radio" name="rating" value="1.0" className="bg-green-500 mask mask-star-2 mask-half-2"  defaultChecked={ (productData.rating >= 1.0) && true } />
+						<input type="radio" name="rating" value="1.5" className="bg-green-500 mask mask-star-2 mask-half-1"  defaultChecked={ (productData.rating >= 1.5) && true } />
+						<input type="radio" name="rating" value="2.0" className="bg-green-500 mask mask-star-2 mask-half-2"  defaultChecked={ (productData.rating >= 2.0) && true } />
+						<input type="radio" name="rating" value="2.5" className="bg-green-500 mask mask-star-2 mask-half-1"  defaultChecked={ (productData.rating >= 2.5) && true } />
+						<input type="radio" name="rating" value="3.0" className="bg-green-500 mask mask-star-2 mask-half-2"  defaultChecked={ (productData.rating >= 3.0) && true } />
+						<input type="radio" name="rating" value="3.5" className="bg-green-500 mask mask-star-2 mask-half-1"  defaultChecked={ (productData.rating >= 3.5) && true } />
+						<input type="radio" name="rating" value="4.0" className="bg-green-500 mask mask-star-2 mask-half-2"  defaultChecked={ (productData.rating >= 4.0) && true } />
+						<input type="radio" name="rating" value="4.5" className="bg-green-500 mask mask-star-2 mask-half-1"  defaultChecked={ (productData.rating >= 4.5) && true } />
+						<input type="radio" name="rating" value="5.0" className="bg-green-500 mask mask-star-2 mask-half-2"  defaultChecked={ (productData.rating >= 5.0) && true } />
 					</div>
 				</div>
 				
