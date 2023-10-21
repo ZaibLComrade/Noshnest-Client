@@ -16,6 +16,8 @@ import ProductDetails from './components/brand/ProductDetails';
 import ProductUpdate from './components/brand/ProductUpdate';
 import Cart from './components/Cart';
 
+
+// const server = "http://localhost:5000";
 const server = "https://noshnest-server.vercel.app";
 
 const router = createBrowserRouter([

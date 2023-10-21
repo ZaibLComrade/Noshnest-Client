@@ -6,7 +6,7 @@ import {useState} from "react";
 import { FcGoogle } from "react-icons/fc"
 
 export default function LoginForm() {
-	const { loginUser, googleSignInUser, user, setLoading } = useAuth();
+	const { loginUser, googleSignInUser, user, GoogleAuthProvider, setLoading } = useAuth();
 	const [tempEmail, setTempEmail] = useState("");
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -104,7 +104,33 @@ export default function LoginForm() {
 	const handleGoogleSignIn = e => {
 		e.preventDefault();
 		googleSignInUser()
-			.then(() => navigate(location?.state || "/"))
+			.then((result) => {
+				const user = result.user;
+				if(location.state === "/cart/null") {
+					fetch(`${server}/users/${user.email}`)
+						.then(response => response.json())
+						.then(userId => {
+							location.state = `/cart/${userId}`;
+							Swal.fire({
+								title: "Successfully logged in",
+								icon: "success",
+								confirmButtonText: "Continue",
+							}).then(() => {
+								navigate(location.state);
+								setLoading(false);
+							});
+						});
+				} else {
+					Swal.fire({
+						title: "Successfully logged in",
+						icon: "success",
+						confirmButtonText: "Continue",
+					}).then(() => {
+						navigate(location?.state || "/");
+						setLoading(false);
+					});
+				}
+			})
 			.catch(err => console.error(err));
   }
 	

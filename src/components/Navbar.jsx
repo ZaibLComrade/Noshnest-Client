@@ -135,7 +135,7 @@ export default function Navbar({ setDark }) {
 					<div className="bg-white border rounded-full">
 						<img src={ DarkImg } className="w-6 h-6"/>
 					</div>
-					<input type="checkbox" className="toggle" defaultCheckedd onChange={ handleToggle } />
+					<input type="checkbox" className="toggle" defaultChecked onChange={ handleToggle } />
 				</div>
 							</li>
 							<li>

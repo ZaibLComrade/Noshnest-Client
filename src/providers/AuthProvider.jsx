@@ -68,6 +68,7 @@ export default function AuthProvider({ children }) {
 		logoutUser,
 		updateProfile,
 		googleSignInUser,
+		GoogleAuthProvider,
 	}
 	
 	return <AuthContext.Provider value={ authValue }>
