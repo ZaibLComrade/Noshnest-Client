@@ -1,6 +1,7 @@
-# React + Vite
+# Nosh Nest
+## Live link: noshnest.web.app
 
-# Features
+## Features
 - 4 different loading spinners displays randomly
 - Attractve fonts
 - Users can update add and update existing products
