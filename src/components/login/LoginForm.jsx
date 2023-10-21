@@ -110,13 +110,12 @@ export default function LoginForm() {
 					fetch(`${server}/users/${user.email}`)
 						.then(response => response.json())
 						.then(userId => {
-							location.state = `/cart/${userId}`;
 							Swal.fire({
 								title: "Successfully logged in",
 								icon: "success",
 								confirmButtonText: "Continue",
 							}).then(() => {
-								navigate(location.state);
+								navigate(`/cart/${userId}`);
 								setLoading(false);
 							});
 						});
