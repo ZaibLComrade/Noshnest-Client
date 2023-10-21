@@ -17,9 +17,9 @@ export default function ProductPage() {
 						<div className="h-[300px] w-full rounded-lg p-4">
 							<img src={ product.img } className="object-contain w-full h-full rounded-lg md:object-cover"/>
 						</div>
-						<div className="flex flex-col justify-between p-4 text-white font-raleway lg:h-full gap-6">
+						<div className="flex flex-col justify-between p-4 text-white font-lato lg:h-full gap-6">
 								<div>
-								<h3 className="font-semibold"><span>Name:</span> <span>{ product.name }</span></h3>
+								<h3 className="text-xl font-semibold font-montserrat"><span>Name:</span> <span>{ product.name }</span></h3>
 								<p><span>Type:</span> <span>{ product.type }</span></p>
 								<p><span>Brand:</span> <span>{ product.brand_name }</span></p>
 									<p className={(product.rating >= 4.5) && "font-semibold"}><span>Rating:</span> <span>{ product.rating }</span></p>

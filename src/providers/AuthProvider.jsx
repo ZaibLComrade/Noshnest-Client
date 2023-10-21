@@ -8,6 +8,8 @@ import {
 	onAuthStateChanged,
 	updateProfile,
 	signOut,
+	GoogleAuthProvider,
+	signInWithPopup,
 } from "firebase/auth";
 
 export const AuthContext = createContext(null);
@@ -32,6 +34,12 @@ export default function AuthProvider({ children }) {
 		})
 		return () => unsubscribe();
 	}, [server])
+	
+	const googleSignInUser = () => {
+		setLoading(true);
+		const provider = new GoogleAuthProvider;
+		return signInWithPopup(auth, provider);
+	}
 	
 	const createUser = (email, password) => {
 		setLoading(false);
@@ -59,6 +67,7 @@ export default function AuthProvider({ children }) {
 		loginUser,
 		logoutUser,
 		updateProfile,
+		googleSignInUser,
 	}
 	
 	return <AuthContext.Provider value={ authValue }>

@@ -18,7 +18,7 @@ export default function Slider() {
 					rewind: true,
 					type: "loop",
 					pauseOnHover: false,
-					height: "100vh",
+					height: "90vh",
 					width: "100%",
 				}}
 			>

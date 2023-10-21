@@ -67,7 +67,7 @@ export default function Navbar({ setDark }) {
 					<div className="bg-white border rounded-full">
 						<img src={ DarkImg } className="w-6 h-6"/>
 					</div>
-					<input type="checkbox" className="toggle" onChange={ handleToggle } />
+					<input type="checkbox" className="toggle" defaultChecked onChange={ handleToggle } />
 				</div>
 				<div className="card-actions">
 					<Link state={ `/cart/${userId}` } to={userId ? `/cart/${userId}` : "/login" }>
@@ -103,7 +103,7 @@ export default function Navbar({ setDark }) {
 								Sign Out
 							</button>
 						) : (
-							<Link to="/login" className="normal-case text-md btn font-montserrat btn-block">
+							<Link to="/login" className="normal-case text-md btn font-montserrat btn-primary">
 								Login
 							</Link>
 						)}
@@ -135,7 +135,7 @@ export default function Navbar({ setDark }) {
 					<div className="bg-white border rounded-full">
 						<img src={ DarkImg } className="w-6 h-6"/>
 					</div>
-					<input type="checkbox" className="toggle" onChange={ handleToggle } />
+					<input type="checkbox" className="toggle" defaultCheckedd onChange={ handleToggle } />
 				</div>
 							</li>
 							<li>

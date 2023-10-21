@@ -3,9 +3,10 @@ import useAuth from "../../hooks/useAuth";
 import useServer from "../../hooks/useServer";
 import Swal from "sweetalert2";
 import {useState} from "react";
+import { FcGoogle } from "react-icons/fc"
 
 export default function LoginForm() {
-	const { loginUser, user, setLoading } = useAuth();
+	const { loginUser, googleSignInUser, user, setLoading } = useAuth();
 	const [tempEmail, setTempEmail] = useState("");
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -100,6 +101,13 @@ export default function LoginForm() {
 			});
 	};
 	
+	const handleGoogleSignIn = e => {
+		e.preventDefault();
+		googleSignInUser()
+			.then(() => navigate(location?.state || "/"))
+			.catch(err => console.error(err));
+  }
+	
 	return (
 		<div>
 			{location.state && (
@@ -151,9 +159,14 @@ export default function LoginForm() {
 						<button className="btn btn-primary">Login</button>
 					</div>
 				</form>
+				<div className="w-full px-8 mx-auto mb-4 text-center">
+					<hr className="w-full border"/>
+					<p className="relative w-8 mx-auto font-bold bg-base-100 -top-3"> Or</p>
+					<button onClick={ handleGoogleSignIn } className="flex items-center w-full btn btn-accent gap-2"><FcGoogle className="text-xl"/><div>Login with Google</div></button>
+				</div>
 				<div className="mx-auto text-sm text-center md:text-base">
 					<p>
-						Don't have an account?{" "}
+						Don&apos;t have an account?{" "}
 						<Link
 							className="text-blue-600 underline hover:text-blue-500"
 							to="/register"
