@@ -24,6 +24,7 @@ export default function Navbar({ setDark }) {
 	const { user, logoutUser, userId } = useAuth();
 	
 	const handleToggle = e => {
+		console.log("e.target.checked");
 		if(e.target.checked) setDark("dark");
 		else setDark("light");
 	}
